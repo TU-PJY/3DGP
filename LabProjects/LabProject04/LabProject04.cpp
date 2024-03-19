@@ -1,9 +1,9 @@
 ﻿// LabProject04.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
+#include "stdafx.h"
 #include "LabProject04.h"
 #include "GameFramework.h"
-#include "stdafx.h"
 
 #define MAX_LOADSTRING 100
 
