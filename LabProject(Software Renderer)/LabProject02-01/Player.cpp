@@ -5,8 +5,11 @@
 //
 CPlayer::CPlayer(){}
 
+
+
 CPlayer::~CPlayer(){
-	if (m_pCamera) delete m_pCamera;
+	if (m_pCamera) 
+		delete m_pCamera;
 }
 
 
@@ -46,6 +49,7 @@ void CPlayer::Move(DWORD dwDirection, float fDistance){
 void CPlayer::Move(XMFLOAT3& xmf3Shift, bool bUpdateVelocity){
 	if (bUpdateVelocity)
 		m_xmf3Velocity = Vector3::Add(m_xmf3Velocity, xmf3Shift);
+
 	else{
 		m_xmf3Position = Vector3::Add(xmf3Shift, m_xmf3Position);
 		m_pCamera->Move(xmf3Shift);
@@ -88,8 +92,7 @@ void CPlayer::Rotate(float fPitch, float fYaw, float fRoll) {
 
 
 
-void CPlayer::LookAt(XMFLOAT3& xmf3LookAt, XMFLOAT3& xmf3Up)
-{
+void CPlayer::LookAt(XMFLOAT3& xmf3LookAt, XMFLOAT3& xmf3Up) {
 	XMFLOAT4X4 xmf4x4View = Matrix4x4::LookAtLH(m_xmf3Position, xmf3LookAt, xmf3Up);
 
 	m_xmf3Right = Vector3::Normalize(XMFLOAT3(xmf4x4View._11, xmf4x4View._21, xmf4x4View._31));
@@ -110,7 +113,9 @@ void CPlayer::Update(float fTimeElapsed) {
 	float fLength = Vector3::Length(m_xmf3Velocity);
 
 	float fDeceleration = m_fFriction * fTimeElapsed;
-	if (fDeceleration > fLength) fDeceleration = fLength;
+
+	if (fDeceleration > fLength) 
+		fDeceleration = fLength;
 
 	m_xmf3Velocity = Vector3::Add(m_xmf3Velocity, xmf3Deceleration, fDeceleration);
 }
@@ -155,9 +160,10 @@ void CPlayer::Render(HDC hDCFrameBuffer, CCamera* pCamera) {
 //
 CAirplanePlayer::CAirplanePlayer() {
 	CCubeMesh* pBulletMesh = new CCubeMesh(1.0f, 4.0f, 1.0f);
-	for (int i = 0; i < BULLETS; i++)
-	{
+
+	for (int i = 0; i < BULLETS; i++) {
 		m_ppBullets[i] = new CBulletObject(m_fBulletEffectiveRange);
+
 		m_ppBullets[i]->SetMesh(pBulletMesh);
 		m_ppBullets[i]->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
 		m_ppBullets[i]->SetRotationSpeed(360.0f);
@@ -195,7 +201,9 @@ void CAirplanePlayer::OnUpdateTransform() {
 void CAirplanePlayer::Render(HDC hDCFrameBuffer, CCamera* pCamera) {
 	CPlayer::Render(hDCFrameBuffer, pCamera);
 
-	for (int i = 0; i < BULLETS; i++) if (m_ppBullets[i]->m_bActive) m_ppBullets[i]->Render(hDCFrameBuffer, pCamera);
+	for (int i = 0; i < BULLETS; i++) 
+		if (m_ppBullets[i]->m_bActive) 
+			m_ppBullets[i]->Render(hDCFrameBuffer, pCamera);
 }
 
 

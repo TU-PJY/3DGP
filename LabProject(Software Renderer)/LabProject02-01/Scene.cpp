@@ -16,11 +16,14 @@ CScene::~CScene() {}
 
 void CScene::BuildObjects() {
 	CExplosiveObject::PrepareExplosion();
-
+	
+	// 벽을 만드는 코드
 	float fHalfWidth = 45.0f, fHalfHeight = 45.0f, fHalfDepth = 200.0f;
 
+	// 벽이 가지는 매쉬
 	CWallMesh* pWallCubeMesh = new CWallMesh(fHalfWidth * 2.0f, fHalfHeight * 2.0f, fHalfDepth * 2.0f, 30);
 
+	// 벽 객체
 	m_pWallsObject = new CWallsObject();
 
 	m_pWallsObject->SetPosition(0.0f, 0.0f, 0.0f);
@@ -40,111 +43,118 @@ void CScene::BuildObjects() {
 							XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 
 
-	CCubeMesh* pCubeMesh = new CCubeMesh(4.0f, 4.0f, 4.0f);
+	// 과제를 위해 큐브를 제거함
+	// 
+	//// 공중에 떠다니는 큐브가 가지는 메쉬
+	//CCubeMesh* pCubeMesh = new CCubeMesh(4.0f, 4.0f, 4.0f); // -> setMesh를 통해 공중을 떠다니는 큐브들에 메쉬 삽입
 
-	m_nObjects = 10;
-	m_ppObjects = new CGameObject * [m_nObjects];
+	//// 공중에 떠다니는 큐브 10개
+	//// 아래의 코드들은 모두 공중에 떠다니는 큐브를 생성하고 세팅하는 코드인듯?
+	//m_nObjects = 10;
+	//m_ppObjects = new CGameObject * [m_nObjects];
 
+	//
+	//CExplosiveObject* pExplosiveObject;
 
-	CExplosiveObject *pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(255, 0, 0));
-	pExplosiveObject->SetPosition(-13.5f, 0.0f, -14.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 1.0f));
-	pExplosiveObject->SetRotationSpeed(90.0f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, 0.0f, 0.0f));
-	pExplosiveObject->SetMovingSpeed(10.5f);
-	m_ppObjects[0] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(255, 0, 0));
+	//pExplosiveObject->SetPosition(-13.5f, 0.0f, -14.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 1.0f));
+	//pExplosiveObject->SetRotationSpeed(90.0f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, 0.0f, 0.0f));
+	//pExplosiveObject->SetMovingSpeed(10.5f);
+	//m_ppObjects[0] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(0, 0, 255));
-	pExplosiveObject->SetPosition(+13.5f, 0.0f, -14.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(180.0f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(-1.0f, 0.0f, 0.0f));
-	pExplosiveObject->SetMovingSpeed(8.8f);
-	m_ppObjects[1] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(0, 0, 255));
+	//pExplosiveObject->SetPosition(+13.5f, 0.0f, -14.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(180.0f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(-1.0f, 0.0f, 0.0f));
+	//pExplosiveObject->SetMovingSpeed(8.8f);
+	//m_ppObjects[1] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(0, 255, 0));
-	pExplosiveObject->SetPosition(0.0f, +5.0f, 20.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(30.15f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, -1.0f, 0.0f));
-	pExplosiveObject->SetMovingSpeed(5.2f);
-	m_ppObjects[2] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(0, 255, 0));
+	//pExplosiveObject->SetPosition(0.0f, +5.0f, 20.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(30.15f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, -1.0f, 0.0f));
+	//pExplosiveObject->SetMovingSpeed(5.2f);
+	//m_ppObjects[2] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(0, 255, 255));
-	pExplosiveObject->SetPosition(0.0f, 0.0f, 0.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 1.0f));
-	pExplosiveObject->SetRotationSpeed(40.6f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(0.0f, 0.0f, 1.0f));
-	pExplosiveObject->SetMovingSpeed(20.4f);
-	m_ppObjects[3] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(0, 255, 255));
+	//pExplosiveObject->SetPosition(0.0f, 0.0f, 0.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 1.0f));
+	//pExplosiveObject->SetRotationSpeed(40.6f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(0.0f, 0.0f, 1.0f));
+	//pExplosiveObject->SetMovingSpeed(20.4f);
+	//m_ppObjects[3] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(128, 0, 255));
-	pExplosiveObject->SetPosition(10.0f, 0.0f, 0.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(50.06f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(0.0f, 1.0f, 1.0f));
-	pExplosiveObject->SetMovingSpeed(6.4f);
-	m_ppObjects[4] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(128, 0, 255));
+	//pExplosiveObject->SetPosition(10.0f, 0.0f, 0.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(50.06f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(0.0f, 1.0f, 1.0f));
+	//pExplosiveObject->SetMovingSpeed(6.4f);
+	//m_ppObjects[4] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(255, 0, 255));
-	pExplosiveObject->SetPosition(-10.0f, 0.0f, -10.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(60.06f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, 0.0f, 1.0f));
-	pExplosiveObject->SetMovingSpeed(8.9f);
-	m_ppObjects[5] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(255, 0, 255));
+	//pExplosiveObject->SetPosition(-10.0f, 0.0f, -10.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(60.06f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, 0.0f, 1.0f));
+	//pExplosiveObject->SetMovingSpeed(8.9f);
+	//m_ppObjects[5] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(255, 0, 255));
-	pExplosiveObject->SetPosition(-10.0f, 10.0f, -10.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(60.06f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, 1.0f, 1.0f));
-	pExplosiveObject->SetMovingSpeed(9.7f);
-	m_ppObjects[6] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(255, 0, 255));
+	//pExplosiveObject->SetPosition(-10.0f, 10.0f, -10.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(60.06f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(1.0f, 1.0f, 1.0f));
+	//pExplosiveObject->SetMovingSpeed(9.7f);
+	//m_ppObjects[6] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(255, 0, 128));
-	pExplosiveObject->SetPosition(-10.0f, 10.0f, -20.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(70.06f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(-1.0f, 1.0f, 1.0f));
-	pExplosiveObject->SetMovingSpeed(15.6f);
-	m_ppObjects[7] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(255, 0, 128));
+	//pExplosiveObject->SetPosition(-10.0f, 10.0f, -20.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(70.06f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(-1.0f, 1.0f, 1.0f));
+	//pExplosiveObject->SetMovingSpeed(15.6f);
+	//m_ppObjects[7] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(128, 0, 255));
-	pExplosiveObject->SetPosition(-15.0f, 10.0f, -30.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(90.06f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(0.0f, 0.0f, -1.0f));
-	pExplosiveObject->SetMovingSpeed(15.0f);
-	m_ppObjects[8] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(128, 0, 255));
+	//pExplosiveObject->SetPosition(-15.0f, 10.0f, -30.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(90.06f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(0.0f, 0.0f, -1.0f));
+	//pExplosiveObject->SetMovingSpeed(15.0f);
+	//m_ppObjects[8] = pExplosiveObject;
 
-	pExplosiveObject = new CExplosiveObject();
-	pExplosiveObject->SetMesh(pCubeMesh);
-	pExplosiveObject->SetColor(RGB(255, 64, 64));
-	pExplosiveObject->SetPosition(+15.0f, 10.0f, 0.0f);
-	pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
-	pExplosiveObject->SetRotationSpeed(90.06f);
-	pExplosiveObject->SetMovingDirection(XMFLOAT3(-0.0f, 0.0f, -1.0f));
-	pExplosiveObject->SetMovingSpeed(15.0f);
-	m_ppObjects[9] = pExplosiveObject;
+	//pExplosiveObject = new CExplosiveObject();
+	//pExplosiveObject->SetMesh(pCubeMesh);
+	//pExplosiveObject->SetColor(RGB(255, 64, 64));
+	//pExplosiveObject->SetPosition(+15.0f, 10.0f, 0.0f);
+	//pExplosiveObject->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	//pExplosiveObject->SetRotationSpeed(90.06f);
+	//pExplosiveObject->SetMovingDirection(XMFLOAT3(-0.0f, 0.0f, -1.0f));
+	//pExplosiveObject->SetMovingSpeed(15.0f);
+	//m_ppObjects[9] = pExplosiveObject;
 
 
 #ifdef _WITH_DRAW_AXIS

@@ -29,7 +29,7 @@ CGameObject::~CGameObject(void) {
 }
 
 
-
+// 큐브 위치 업데이트
 void CGameObject::SetPosition(float x, float y, float z) {
 	m_xmf4x4World._41 = x;
 	m_xmf4x4World._42 = y;

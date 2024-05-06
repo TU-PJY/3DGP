@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "Camera.h"
 
+// 큐브 오브젝트 클래스 예: 미사일, 공중에 떠다니는 큐브 등
 class CGameObject
 {
 public:
