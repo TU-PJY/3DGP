@@ -178,6 +178,7 @@ LRESULT CALLBACK CGameFramework::OnProcessingWindowMessage(HWND hWnd, UINT nMess
 	return(0);
 }
 
+// 키보드, 마우스 입력
 void CGameFramework::ProcessInput()
 {
 	static UCHAR pKeyBuffer[256];
@@ -214,10 +215,14 @@ void CGameFramework::ProcessInput()
 	m_pPlayer->Update(m_GameTimer.GetTimeElapsed());
 }
 
+// 오브젝트 애니메이션
 void CGameFramework::AnimateObjects()
 {
 	float fTimeElapsed = m_GameTimer.GetTimeElapsed();
+	// 플레이어 업데이트
 	if (m_pPlayer) m_pPlayer->Animate(fTimeElapsed);
+
+	// 오브젝트 업데이트
 	if (m_pScene) m_pScene->Animate(fTimeElapsed);
 }
 
