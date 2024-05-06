@@ -129,6 +129,7 @@ void CGameFramework::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM
 	}
 }
 
+
 // 플레이어 미사일 발사
 void CGameFramework::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam) {
 	if (m_pScene) 
@@ -146,7 +147,7 @@ void CGameFramework::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPA
 			break;
 
 		// 플레이어 미사일 발사
-		case VK_CONTROL:
+		case VK_SPACE:
 			((CAirplanePlayer*)m_pPlayer)->FireBullet(m_pLockedObject);
 				m_pLockedObject = NULL;
 			break;
@@ -203,22 +204,22 @@ void CGameFramework::ProcessInput() {
 	if (GetKeyboardState(pKeyBuffer)){
 		DWORD dwDirection = 0;
 
-		if (pKeyBuffer[VK_UP] & 0xF0) 
+		if (pKeyBuffer['W'] & 0xF0)
 			dwDirection |= DIR_FORWARD;
 
-		if (pKeyBuffer[VK_DOWN] & 0xF0) 
+		if (pKeyBuffer['S'] & 0xF0)
 			dwDirection |= DIR_BACKWARD;
 
-		if (pKeyBuffer[VK_LEFT] & 0xF0) 
+		if (pKeyBuffer['A'] & 0xF0)
 			dwDirection |= DIR_LEFT;
 
-		if (pKeyBuffer[VK_RIGHT] & 0xF0) 
+		if (pKeyBuffer['D'] & 0xF0)
 			dwDirection |= DIR_RIGHT;
 
-		if (pKeyBuffer[VK_PRIOR] & 0xF0) 
+		if (pKeyBuffer['R'] & 0xF0)
 			dwDirection |= DIR_UP;
 
-		if (pKeyBuffer[VK_NEXT] & 0xF0) 
+		if (pKeyBuffer['F'] & 0xF0)
 			dwDirection |= DIR_DOWN;
 
 
