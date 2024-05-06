@@ -44,13 +44,16 @@ void CScene::BuildObjects() {
 
 
 	// 적 기체
-	CAirplaneMesh* airplaneMesh = new CAirplaneMesh();
+	CAirplaneMesh* airplaneMesh = new CAirplaneMesh(6.0, 6.0, 1.0);
 
-	m_airplane_object = new CAirplaneObject();
+	for (int i = 0; i < 5; ++i) {
+		m_airplane_object[i] = new CAirplaneObject();
 
-	m_airplane_object->SetPosition(0.0f, 0.0f, 0.0f);
-	m_airplane_object->SetMesh(airplaneMesh);
-	m_pWallsObject->SetColor(RGB(256, 0, 0));
+		m_airplane_object[i]->SetPosition(-30.0f + i * 15, 0.0f, 20.0f);
+		m_airplane_object[i]->SetMesh(airplaneMesh);
+		m_airplane_object[i]->Rotate(-90.0, 0.0, 0.0);
+		m_airplane_object[i]->SetColor(RGB(255, 0, 0));
+	}
 
 	// 과제를 위해 큐브를 제거함
 	//// 
@@ -190,8 +193,8 @@ void CScene::ReleaseObjects() {
 		delete m_pWallsObject;
 
 	// 적 기체
-	if (m_airplane_object)
-		delete m_airplane_object;
+	for(int i = 0; i < 5; ++i)
+		delete m_airplane_object[i];
 
 
 #ifdef _WITH_DRAW_AXIS
@@ -441,8 +444,8 @@ void CScene::Render(HDC hDCFrameBuffer, CCamera* pCamera) {
 	if (m_pPlayer) 
 		m_pPlayer->Render(hDCFrameBuffer, pCamera);
 
-	if (m_airplane_object)
-		m_airplane_object->Render(hDCFrameBuffer, pCamera);
+	for(int i = 0; i < 5; ++i)
+		m_airplane_object[i]->Render(hDCFrameBuffer, pCamera);
 
 
 //UI

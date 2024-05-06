@@ -13,9 +13,10 @@ public:
 private:
 	int							m_nObjects = 0;
 	CGameObject					**m_ppObjects = NULL;
+	CGameObject				**m_airplane_objects = NULL;
 
 	CWallsObject*				m_pWallsObject = NULL;
-	CAirplaneObject*			m_airplane_object = NULL;
+	CAirplaneObject*			m_airplane_object[5]{};
 
 	CPlayer*					m_pPlayer = NULL;
 
