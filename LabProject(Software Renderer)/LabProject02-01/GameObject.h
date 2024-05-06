@@ -14,6 +14,7 @@ public:
 	bool						m_bActive = true;
 
 	CMesh*						m_pMesh = NULL;
+	CAirplaneMesh*				  m_airplane_mesh = NULL;
 	XMFLOAT4X4					m_xmf4x4World = Matrix4x4::Identity();
 
 	BoundingOrientedBox			m_xmOOBB = BoundingOrientedBox();
@@ -109,6 +110,16 @@ public:
 
 	static void PrepareExplosion();
 };
+
+
+class CAirplaneObject : public CGameObject {
+public:
+	CAirplaneObject();
+	virtual ~CAirplaneObject();
+
+	virtual void Render(HDC hDCFrameBuffer, CCamera* pCamera);
+};
+
 
 class CWallsObject : public CGameObject
 {

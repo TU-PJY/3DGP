@@ -75,7 +75,7 @@ void CGameFramework::BuildObjects()
 	
 
 	// 플레이어 전투기 생성, (좌우 길이, 앞뒤 길이, 높이)
-	CAirplaneMesh* pAirplaneMesh = new CAirplaneMesh(6.0f, 1.0f, 1.0f);
+	CAirplaneMesh* pAirplaneMesh = new CAirplaneMesh(6.0f, 6.0f, 1.0f);
 
 	// 플레이어 전투기 초기 설정, 위치, 색 등
 	// 아래의 과정을 거쳐야 하는 것 같다
@@ -258,10 +258,12 @@ void CGameFramework::AnimateObjects() {
 	float fTimeElapsed = m_GameTimer.GetTimeElapsed();
 
 	// 플레이어 업데이트
-	if (m_pPlayer) m_pPlayer->Animate(fTimeElapsed);
+	if (m_pPlayer) 
+		m_pPlayer->Animate(fTimeElapsed);
 
 	// 오브젝트 업데이트
-	if (m_pScene) m_pScene->Animate(fTimeElapsed);
+	if (m_pScene) 
+		m_pScene->Animate(fTimeElapsed);
 }
 
 

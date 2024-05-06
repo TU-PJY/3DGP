@@ -15,7 +15,7 @@ CScene::~CScene() {}
 
 
 void CScene::BuildObjects() {
-	CExplosiveObject::PrepareExplosion();
+	//CExplosiveObject::PrepareExplosion();
 	
 	// 벽을 만드는 코드
 	float fHalfWidth = 45.0f, fHalfHeight = 45.0f, fHalfDepth = 200.0f;
@@ -43,8 +43,17 @@ void CScene::BuildObjects() {
 							XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 
 
+	// 적 기체
+	CAirplaneMesh* airplaneMesh = new CAirplaneMesh();
+
+	m_airplane_object = new CAirplaneObject();
+
+	m_airplane_object->SetPosition(0.0f, 0.0f, 0.0f);
+	m_airplane_object->SetMesh(airplaneMesh);
+	m_pWallsObject->SetColor(RGB(256, 0, 0));
+
 	// 과제를 위해 큐브를 제거함
-	// 
+	//// 
 	//// 공중에 떠다니는 큐브가 가지는 메쉬
 	//CCubeMesh* pCubeMesh = new CCubeMesh(4.0f, 4.0f, 4.0f); // -> setMesh를 통해 공중을 떠다니는 큐브들에 메쉬 삽입
 
@@ -180,6 +189,10 @@ void CScene::ReleaseObjects() {
 	if (m_pWallsObject) 
 		delete m_pWallsObject;
 
+	// 적 기체
+	if (m_airplane_object)
+		delete m_airplane_object;
+
 
 #ifdef _WITH_DRAW_AXIS
 	if (m_pWorldAxis) delete m_pWorldAxis;
@@ -206,18 +219,18 @@ void CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wPar
 		case '8':
 
 
-		case '9':{
+		/*case 'C':{
 			CExplosiveObject* pExplosiveObject = (CExplosiveObject*)m_ppObjects[int(wParam - '1')];
 			pExplosiveObject->m_bBlowingUp = true;
 			break;
 		}
 
-		case 'A':
+		case 'V':
 			for (int i = 0; i < m_nObjects; i++){
 				CExplosiveObject* pExplosiveObject = (CExplosiveObject*)m_ppObjects[i];
 				pExplosiveObject->m_bBlowingUp = true;
 			}
-			break;
+			break;*/
 
 
 		default:
@@ -374,7 +387,8 @@ void CScene::CheckPlayerByWallCollision() {
 
 	XMStoreFloat4(&xmOOBBPlayerMoveCheck.Orientation, XMQuaternionNormalize(XMLoadFloat4(&xmOOBBPlayerMoveCheck.Orientation)));
 
-	if (!xmOOBBPlayerMoveCheck.Intersects(m_pPlayer->m_xmOOBB)) m_pWallsObject->SetPosition(m_pPlayer->m_xmf3Position);
+	if (!xmOOBBPlayerMoveCheck.Intersects(m_pPlayer->m_xmOOBB)) 
+		m_pWallsObject->SetPosition(m_pPlayer->m_xmf3Position);
 }
 
 
@@ -399,7 +413,8 @@ void CScene::CheckObjectByBulletCollisions() {
 void CScene::Animate(float fElapsedTime) {
 	m_pWallsObject->Animate(fElapsedTime);
 
-	for (int i = 0; i < m_nObjects; i++) m_ppObjects[i]->Animate(fElapsedTime);
+	for (int i = 0; i < m_nObjects; i++) 
+		m_ppObjects[i]->Animate(fElapsedTime);
 
 	CheckPlayerByWallCollision();
 
@@ -425,6 +440,9 @@ void CScene::Render(HDC hDCFrameBuffer, CCamera* pCamera) {
 
 	if (m_pPlayer) 
 		m_pPlayer->Render(hDCFrameBuffer, pCamera);
+
+	if (m_airplane_object)
+		m_airplane_object->Render(hDCFrameBuffer, pCamera);
 
 
 //UI

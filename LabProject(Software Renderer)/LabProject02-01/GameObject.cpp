@@ -271,6 +271,13 @@ CWallsObject::CWallsObject() {}
 
 CWallsObject::~CWallsObject() {}
 
+CAirplaneObject::CAirplaneObject() {}
+CAirplaneObject::~CAirplaneObject() {}
+
+
+void CAirplaneObject::Render(HDC hDCFrameBuffer, CCamera* pCamera) {
+	CGameObject::Render(hDCFrameBuffer, &m_xmf4x4World, m_pMesh);
+}
 
 
 void CWallsObject::Render(HDC hDCFrameBuffer, CCamera* pCamera) {

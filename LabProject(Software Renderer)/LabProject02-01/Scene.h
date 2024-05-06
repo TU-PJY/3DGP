@@ -15,6 +15,7 @@ private:
 	CGameObject					**m_ppObjects = NULL;
 
 	CWallsObject*				m_pWallsObject = NULL;
+	CAirplaneObject*			m_airplane_object = NULL;
 
 	CPlayer*					m_pPlayer = NULL;
 
