@@ -444,7 +444,8 @@ void CScene::Render(HDC hDCFrameBuffer, CCamera* pCamera) {
 	if (m_pPlayer) 
 		m_pPlayer->Render(hDCFrameBuffer, pCamera);
 
-	for(int i = 0; i < 5; ++i)
+
+	for (int i = 0; i < 5; ++i) 
 		m_airplane_object[i]->Render(hDCFrameBuffer, pCamera);
 
 
